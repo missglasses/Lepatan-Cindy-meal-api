@@ -5,14 +5,15 @@ const app = express();
 const PORT = 3000;
 
 const menu = [
-  { id: 1, food: "adobo", price: 85 },
+  { id: 1, food: "pomodoro", price: 85 },
   { id: 2, food: "fried chicken", price: 95 },
-  { id: 3, food: "yum burger", price: 60 },
-  { id: 4, food: "pomodoro", price: 200 },
+  { id: 3, food: "burger", price: 60 },
+  { id: 4, food: "fries", price: 200 },
   { id: 5, food: "croissant", price: 150 },
   { id: 6, food: "cookie", price: 80 },
-  { id: 7, food: "iced coffee", price: 150 },
+  { id: 7, food: "iced americano", price: 150 },
   { id: 8, food: "matcha", price: 170 }
+   { id: 8, food: "cafe latte", price: 170 }
 ];
 
 // all

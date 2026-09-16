@@ -1,6 +1,5 @@
+*
 
 !.gitignore
 !index.html
 !server.js
-
-node_modules/
