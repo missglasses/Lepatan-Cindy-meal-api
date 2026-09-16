@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Leps Cafe</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 500px; margin: 40px auto; }
+  table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+  th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+  th { background: #f0f0f0; }
+  button { padding: 6px 12px; margin-right: 8px; }
+  input { padding: 6px; }
+  .menu-actions { text-align: right; }
+</style>
+</head>
+<body>
+
+<h2>Menu</h2>
+
+<div class="menu-actions">
+  <button id="loadBtn">Load Menu</button>
+</div>
+<input type="number" id="searchId" placeholder="Enter id">
+<button id="searchBtn">Search</button>
+
+<table id="menuTable">
+  <thead>
+    <tr><th>id</th><th>food</th><th>price</th></tr>
+  </thead>
+  <tbody id="menuBody"></tbody>
+</table>
+
+<p id="message"></p>
+
+<script>
+const menuBody = document.getElementById('menuBody');
+const message = document.getElementById('message');
+
+function renderRows(items) {
+  menuBody.innerHTML = '';
+  items.forEach(item => {
+    const row = document.createElement('tr');
+    row.innerHTML = `<td>${item.id}</td><td>${item.food}</td><td>${item.price}</td>`;
+    menuBody.appendChild(row);
+  });
+}
+
+document.getElementById('loadBtn').addEventListener('click', async () => {
+  message.textContent = '';
+  try {
+    const res = await fetch('/api/menu');
+    const data = await res.json();
+    renderRows(data);
+  } catch (err) {
+    message.textContent = 'Failed to load menu.';
+  }
+});
+
+document.getElementById('searchBtn').addEventListener('click', async () => {
+  const id = document.getElementById('searchId').value;
+  message.textContent = '';
+
+  if (!id) {
+    message.textContent = 'Please enter an id.';
+    return;
+  }
+
+  try {
+    const res = await fetch(`/api/menu/${id}`);
+    if (res.status === 404) {
+      menuBody.innerHTML = '';
+      message.textContent = 'Item not found.';
+      return;
+    }
+    const item = await res.json();
+    renderRows([item]);
+  } catch (err) {
+    message.textContent = 'Search failed.';
+  }
+});
+</script>
+
+</body>
+</html>
