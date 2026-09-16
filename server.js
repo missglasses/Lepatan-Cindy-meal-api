@@ -12,7 +12,7 @@ const menu = [
   { id: 5, food: "croissant", price: 150 },
   { id: 6, food: "cookie", price: 80 },
   { id: 7, food: "iced americano", price: 150 },
-  { id: 8, food: "matcha", price: 170 }
+  { id: 8, food: "matcha", price: 170 },
    { id: 8, food: "cafe latte", price: 170 }
 ];
 
